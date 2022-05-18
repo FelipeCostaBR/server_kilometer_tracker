@@ -1,7 +1,7 @@
-import { getRepository, UsingJoinColumnIsNotAllowedError } from "typeorm";
+import { getRepository } from "typeorm";
 import AppError from "../errors/AppError";
 import User from "../models/User";
-
+import { formatDate } from "../helper/formatDate";
 import authConfig from '../config/auth';
 import { sign } from "jsonwebtoken";
 
@@ -15,12 +15,12 @@ class CreateSessionService {
     const usersRepository = getRepository(User);
 
     const user = await usersRepository.findOne({ where: { email } });
-
+    console.log(user)
     if (!user) {
       throw new AppError("Email does not exist, please sign up", 401);
     }
 
-    if (user.email !== email || user.date_birth !== date_birth) {
+    if (user.email !== email || formatDate(user.date_birth) !== date_birth) {
       throw new AppError('Incorrect email/date_birth combination.', 401);
     }
 
