@@ -4,14 +4,14 @@ import { getRepository } from 'typeorm';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import isAdmin from '../middlewares/isAdmin';
 
-import Vehicle from '../models/Vehicle';
+import Vehicle from '../database/entities/Vehicle';
 import CreateVehicleService from '../services/VehicleServices/CreateVehicleService';
 import DeleteVehicleService from '../services/VehicleServices/DeleteVehicleService';
 import UpdateVehicleWithUserService from '../services/VehicleServices/UpdateVehicleWithUserService';
 
 const vehiclesRouter = Router();
 
-vehiclesRouter.use(ensureAuthenticated);
+// vehiclesRouter.use(ensureAuthenticated);
 
 vehiclesRouter.get('/', async (_, response: Response) => {
   const vehiclesRepository = getRepository(Vehicle);

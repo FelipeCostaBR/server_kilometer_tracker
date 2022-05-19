@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import Vehicle from '../../models/Vehicle';
+import Vehicle from '../../database/entities/Vehicle';
 import AppError from '../../errors/AppError';
 import { NumberSymbol } from '@angular/common';
 

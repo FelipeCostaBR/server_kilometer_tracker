@@ -2,15 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
+  BaseEntity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Vehicle from './Vehicle';
-
 @Entity('users')
-class User {
+class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

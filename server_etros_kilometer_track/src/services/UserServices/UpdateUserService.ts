@@ -1,6 +1,6 @@
 import { getRepository, UpdateResult } from 'typeorm';
 // import { hash } from 'bcryptjs';
-import User from '../../models/User';
+import User from '../../database/entities/User';
 import AppError from '../../errors/AppError';
 
 interface IRequest {

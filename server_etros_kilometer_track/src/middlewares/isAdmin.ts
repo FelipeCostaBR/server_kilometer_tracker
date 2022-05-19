@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { getRepository } from 'typeorm';
 
 import AppError from '../errors/AppError';
-import User from '../models/User';
+import User from '../database/entities/User';
 
 
 export default async function isAdmin(
