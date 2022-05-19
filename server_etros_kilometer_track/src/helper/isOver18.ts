@@ -9,7 +9,7 @@ function isOver18(dateOfBirth: Date) {
 
 export function validate_dt_birth(date: Date) {
   while (!isOver18(date)) {
-    date = faker.date.past(20);
+    date = faker.date.past(70);
   }
 
   return date;
