@@ -24,10 +24,10 @@ https://www.figma.com/file/nIsrrvRJPYscmc5uhrez3q/ETROS-Car-Renting-Appliction?n
 * have docker up and running.
 
 * go into the folder server_etros_kilometer_track and run the command line:
-This command will install yarn, download postgres image and create the container for the application and run the migration to create the database and the tables. 
+This command will install yarn, download postgres image and create the container for the application, run the migration to create the database and the tables and run the seed to populate the database. 
 
 
-`npm install --global yarn && yarn  && docker build -t my-postgres-db ./ && docker run --name Etros_kilometer_tracker -e POSTGRES_PASSWORD=docker -p 5432:5432 -d my-postgres-db && yarn typeorm migration:run`
+`npm install --global yarn && yarn  && docker build -t my-postgres-db ./ && docker run --name Etros_kilometer_tracker -e POSTGRES_PASSWORD=docker -p 5432:5432 -d my-postgres-db && yarn typeorm migration:run && yarn db:seed`
 
 * After this command you have the backend environment ready. So to start the server by running 
 
