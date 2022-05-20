@@ -7,15 +7,24 @@ import isAdmin from '../middlewares/isAdmin';
 import Vehicle from '../database/entities/Vehicle';
 import CreateVehicleService from '../services/VehicleServices/CreateVehicleService';
 import DeleteVehicleService from '../services/VehicleServices/DeleteVehicleService';
-import UpdateVehicleWithUserService from '../services/VehicleServices/UpdateVehicleWithUserService';
+import UpdateVehicleService from '../services/VehicleServices/UpdateVehicleService';
 
 const vehiclesRouter = Router();
 
-// vehiclesRouter.use(ensureAuthenticated);
+vehiclesRouter.use(ensureAuthenticated);
 
 vehiclesRouter.get('/', async (_, response: Response) => {
   const vehiclesRepository = getRepository(Vehicle);
   const vehicle = await vehiclesRepository.find();
+
+  response.json(vehicle);
+});
+
+vehiclesRouter.get('/:id', async (request: Request, response: Response) => {
+  const { id } = request.params;
+
+  const vehiclesRepository = getRepository(Vehicle);
+  const vehicle = await vehiclesRepository.findOne(id);
 
   response.json(vehicle);
 });
@@ -41,10 +50,11 @@ vehiclesRouter.delete('/:id', isAdmin, async (request: Request, response: Respon
 vehiclesRouter.put('/:id', async (request: Request, response: Response) => {
   const { id } = request.params;
   const { user_id } = request.user;
+  const vehicle_to_update = request.body;
 
-  const updateVehicleWithUserService = new UpdateVehicleWithUserService();
+  const updateVehicleService = new UpdateVehicleService();
 
-  const vehicle = await updateVehicleWithUserService.execute(id, user_id)
+  const vehicle = await updateVehicleService.execute(id, user_id, vehicle_to_update)
 
   return response.json(vehicle);
 });

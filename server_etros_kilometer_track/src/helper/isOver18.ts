@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { formatDate } from "./formatDate";
 
 function isOver18(dateOfBirth: Date) {
   const date18YrsAgo = new Date();
@@ -7,11 +8,11 @@ function isOver18(dateOfBirth: Date) {
   return dateOfBirth <= date18YrsAgo;
 }
 
-export function validate_dt_birth(date: Date) {
+export default function validate_dt_birth(date: Date): String {
   while (!isOver18(date)) {
     date = faker.date.past(70);
   }
 
-  return date;
+  return date.toISOString();
 }
 

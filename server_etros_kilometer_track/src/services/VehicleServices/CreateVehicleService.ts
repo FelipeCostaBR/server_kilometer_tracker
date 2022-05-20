@@ -11,7 +11,7 @@ interface IRequest {
   transmission: string;
   registration: string;
   current_kilometers: number;
-  next_km_to_service: NumberSymbol;
+  next_km_to_service: number;
   next_service: Date;
 }
 

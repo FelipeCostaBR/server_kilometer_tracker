@@ -5,8 +5,8 @@ import vehiclesRouter from './vehicles.routes';
 
 const routes = Router();
 
-routes.use('/user', usersRouter);
-routes.use('/vehicle', vehiclesRouter);
+routes.use('/users', usersRouter);
+routes.use('/vehicles', vehiclesRouter);
 routes.use('/sessions', sessionsRouter);
 
 export default routes;
