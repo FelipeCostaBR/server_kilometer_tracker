@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Link } from '@chakra-ui/react';
 import logo from '../asset/logo.png';
 
 export const Header = () => {
@@ -7,17 +7,19 @@ export const Header = () => {
     <Flex
       as='header'
       w='100%'
-      mt='8'
+      mt='82px'
       paddingRight={5}
       align='center'
       justify='center'
       display={'block'}
     >
-      <Image
-        src={logo}
-        alt="ETROS Logo"
-        layout='responsive'
-      />
+      <Link href='/'>
+        <Image
+          src={logo}
+          alt="ETROS Logo"
+          layout='responsive'
+        />
+      </Link>
     </Flex >
   )
 }
