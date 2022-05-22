@@ -1,4 +1,4 @@
-import { Flex, Stack, Button, Divider, Box } from '@chakra-ui/react';
+import { Flex, Stack, Button, Divider, Box, Link } from '@chakra-ui/react';
 
 import { Header } from '../components/Header';
 
@@ -13,10 +13,32 @@ export default function Home() {
         align='center'
         justify='center'
       >
-        <Stack spacing={5} w='280px' align='center'>
-          <Button w='200px' colorScheme="green" size={'lg'}>Login</Button>
+        <Stack
+          spacing={5}
+          w='280px'
+          align='center'
+        >
+          <Link href='/login'>
+            <Button
+              w='200px'
+              colorScheme="green"
+              size={'lg'}
+            >
+              Login
+            </Button>
+          </Link>
           <Divider borderWidth={1} />
-          <Button w='200px' colorScheme='black' size={'lg'} variant='outline'>Sign up</Button>
+
+          <Link href='/signup'>
+            <Button
+              w='200px'
+              colorScheme='black'
+              size={'lg'}
+              variant='outline'
+            >
+              Sign up
+            </Button>
+          </Link>
         </Stack>
       </Flex>
     </Box >
