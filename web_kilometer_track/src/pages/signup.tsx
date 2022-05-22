@@ -1,5 +1,4 @@
 import { Flex, Text, Stack, Input, Box, Button, Link, Center } from '@chakra-ui/react'
-import { useState } from 'react';
 import { Header } from "../components/Header";
 import { PasswordInput } from '../components/PasswordInput';
 
@@ -52,21 +51,26 @@ export default function Signup() {
             />
           </Stack>
 
-          <Button
-            type={'submit'}
-            w='100%'
-            colorScheme="green"
-            size={'lg'}
-            mt='50px'
-          >Sign up</Button>
+          <Stack spacing={2}>
+            <Button
+              type={'submit'}
+              w='100%'
+              colorScheme="green"
+              size={'lg'}
+              mt='50px'
+            >
+              Sign up
+            </Button>
 
-          <Center>
-            <Text>Already have an account?
-              <Link href='/login'>
-                <Text fontWeight='bold' as='u'> Log in</Text>
-              </Link>
-            </Text>
-          </Center>
+            <Center>
+              <Text>Already have an account?
+                <Link href='/login'>
+                  <Text fontWeight='bold' as='u'> Log in</Text>
+                </Link>
+              </Text>
+            </Center>
+          </Stack>
+
         </Box>
 
       </Flex>
