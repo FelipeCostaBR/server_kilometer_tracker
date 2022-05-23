@@ -1,7 +1,6 @@
-import { Flex, Box, Stack, Input, Text, Button, Center, Link } from '@chakra-ui/react';
+import { Flex, Box, Stack, Input, Text, Button, Link } from '@chakra-ui/react';
 import { Header } from '../components/Header';
 import { PasswordInput } from '../components/PasswordInput';
-
 
 export default function Login() {
   return (
@@ -33,20 +32,20 @@ export default function Login() {
             <PasswordInput />
           </Stack>
           <Box mt='32px'>
-            <Link href='/login'>
-              <Text textAlign='right'>Forgot Password?</Text>
-            </Link>
+            <Text textAlign='right'>Forgot Password?</Text>
           </Box>
 
-          <Button
-            type={'submit'}
-            w='100%'
-            colorScheme="green"
-            size={'lg'}
-            mt='62px'
-          >
-            Login
-          </Button>
+          <Link href='/dashboard'>
+            <Button
+              type={'submit'}
+              w='100%'
+              colorScheme="green"
+              size={'lg'}
+              mt='62px'
+            >
+              Login
+            </Button>
+          </Link>
         </Box>
 
       </Flex>
