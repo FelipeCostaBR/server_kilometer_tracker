@@ -4,6 +4,9 @@ export const theme = extendTheme({
   colors: {
     green: {
       light: '#3ACB06'
+    },
+    cardBg: {
+      dark: '#565555'
     }
   },
   fonts: {
