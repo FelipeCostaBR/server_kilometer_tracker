@@ -5,7 +5,20 @@ import { Header } from '../components/Header';
 import { OdometerReader } from '../components/OdometerReader';
 
 export default function Dashboard() {
-  const [value, setValue] = React.useState()
+  const userData = {
+    Name: 'Felipe Costa',
+    email: 'felipe.costa@gmail.com',
+    date_birth: '15/07/1992'
+  }
+
+  const vehicleData = {
+    vehicle: 'Toyota',
+    model: 'Corolla',
+    year: '2013',
+    current_kilometers: '80.000',
+    next_km_to_service: '90.000',
+    next_service: '20/06/2023'
+  }
 
   return (
     <Flex
@@ -27,8 +40,9 @@ export default function Dashboard() {
         </Stack>
 
         <Stack spacing={6}>
-          <Card>Your Details</Card>
-          <Card>Vehicle Details</Card>
+          <Card data={userData}>Your Details</Card>
+          <Card data={vehicleData}>Vehicle Details</Card>
+
           <Text fontSize='xl'>Please, insert the odometer reader:</Text>
         </Stack>
 

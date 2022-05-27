@@ -7,6 +7,7 @@ export const Header = () => {
     <Flex
       as='header'
       w='100%'
+      maxW='50%'
       mt='82px'
       paddingRight={5}
       align='center'
