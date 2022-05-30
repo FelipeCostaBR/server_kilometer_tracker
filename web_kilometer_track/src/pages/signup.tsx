@@ -4,7 +4,12 @@ import { PasswordInput } from '../components/PasswordInput';
 
 export default function Signup() {
   return (
-    <Flex flexDir={'column'} w='100vw' h='100vh'>
+    <Flex
+      w='100vw'
+      h='100vh'
+      align='center'
+      flexDir={'column'}
+    >
       <Header />
       <Flex
         as={'form'}

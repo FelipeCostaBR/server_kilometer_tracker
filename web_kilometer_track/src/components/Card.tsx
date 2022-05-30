@@ -12,6 +12,7 @@ export const Card = ({ children, data }: DataInfos) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleTransition = () => setIsOpen(!isOpen)
   const data_array = Object.entries(data)
+
   return (
     <Box
       p={7}

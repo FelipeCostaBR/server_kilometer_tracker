@@ -25,7 +25,6 @@ export default function Dashboard() {
       w='100vw'
       h='100vh'
       align='center'
-      justify='top'
       flexDir={'column'}
     >
       <Header />

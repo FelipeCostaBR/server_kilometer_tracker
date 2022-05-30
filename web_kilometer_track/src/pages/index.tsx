@@ -4,7 +4,12 @@ import { Header } from '../components/Header';
 
 export default function Home() {
   return (
-    <Box>
+    <Flex
+      w='100vw'
+      h='100vh'
+      align='center'
+      flexDir={'column'}
+    >
       <Header />
 
       <Flex
@@ -41,6 +46,6 @@ export default function Home() {
           </Link>
         </Stack>
       </Flex>
-    </Box >
+    </Flex >
   )
 }
