@@ -33,17 +33,31 @@ export const Card = ({ children, data }: DataInfos) => {
         </Flex>
       </Flex>
 
-      <Collapse in={isOpen} startingHeight={0} style={{ display: 'block' }} animateOpacity>
+      <Collapse
+        in={isOpen}
+        startingHeight={0}
+        style={{ display: 'block' }} animateOpacity
+      >
+        <Flex
+          marginRight='2'
+          mt='9'
+          rounded='md'
 
-        <Flex marginRight='2' mt='9' rounded='md'>
-          <Stack spacing={3} mb={5}>
+        >
+          <Stack
+            spacing={3}
+            mb={5}
+            w='100%'
+          >
             {data_array.map((value, index) => (
               <Text
+
                 key={index}
                 bg='white'
                 color='blackAlpha.900'
                 paddingX={3}
                 paddingY={1.5}
+                borderRadius='4px'
               >
                 <strong>{value.shift()}:</strong> {value.pop()}
               </Text>

@@ -43,7 +43,6 @@ export default function Dashboard() {
           <Card data={userData}>Your Details</Card>
           <Card data={vehicleData}>Vehicle Details</Card>
 
-          <Text fontSize='xl'>Please, insert the odometer reader:</Text>
         </Stack>
 
         <Stack
@@ -51,7 +50,9 @@ export default function Dashboard() {
           spacing={7}
           mt={4}
           as='form'
+
         >
+          <Text mt={16} fontSize='xl'>Please, insert the odometer reader:</Text>
           <OdometerReader />
           <Button
             type={'submit'}
