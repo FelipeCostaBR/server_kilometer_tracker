@@ -1,17 +1,14 @@
 import Image from 'next/image';
-import { Flex, Link } from '@chakra-ui/react';
+import { Box, Link } from '@chakra-ui/react';
 import logo from '../asset/logo.png';
 
 export const Header = () => {
   return (
-    <Flex
+    <Box
       as='header'
-      w='100%'
-      mt='82px'
+      w='80%'
+      mt='42px'
       paddingRight={5}
-      align='center'
-      justify='center'
-      display={'block'}
     >
       <Link href='/'>
         <Image
@@ -20,6 +17,6 @@ export const Header = () => {
           layout='responsive'
         />
       </Link>
-    </Flex >
+    </Box >
   )
 }

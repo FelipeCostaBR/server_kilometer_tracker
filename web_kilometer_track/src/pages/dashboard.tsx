@@ -1,17 +1,30 @@
-import { Box, Input, InputGroup, InputLeftElement, Text, Flex, Button, Stack } from '@chakra-ui/react';
+import { Box, Text, Flex, Button, Stack } from '@chakra-ui/react';
+import React from 'react';
 import { Card } from '../components/Card';
 import { Header } from '../components/Header';
-import InputMask from "react-input-mask";
+import { OdometerReader } from '../components/OdometerReader';
 
-import { IoSpeedometerOutline } from 'react-icons/io5';
+export default function Dashboard() {
+  const userData = {
+    Name: 'Felipe Costa',
+    email: 'felipe.costa@gmail.com',
+    date_birth: '15/07/1992'
+  }
 
-export default function Login() {
+  const vehicleData = {
+    vehicle: 'Toyota',
+    model: 'Corolla',
+    year: '2013',
+    current_kilometers: '80.000',
+    next_km_to_service: '90.000',
+    next_service: '20/06/2023'
+  }
+
   return (
     <Flex
       w='100vw'
       h='100vh'
       align='center'
-      justify='top'
       flexDir={'column'}
     >
       <Header />
@@ -26,9 +39,9 @@ export default function Login() {
         </Stack>
 
         <Stack spacing={6}>
-          <Card>Your Details</Card>
-          <Card>Vehicle Details</Card>
-          <Text fontSize='xl'>Please, insert the odometer reader:</Text>
+          <Card data={userData}>Your Details</Card>
+          <Card data={vehicleData}>Vehicle Details</Card>
+
         </Stack>
 
         <Stack
@@ -36,27 +49,10 @@ export default function Login() {
           spacing={7}
           mt={4}
           as='form'
-        >
-          <InputGroup>
-            <Input
-              as={InputMask}
-              placeholder='Type here'
-              _placeholder={{ opacity: 0.5, color: 'inherit' }}
-              paddingLeft={14}
-              size='lg'
-              focusBorderColor='green.light'
-              bg='cardBg.dark'
-              color='white'
-              border='InactiveBorder'
-              isRequired={true}
-              mask="***,***.**"
-              maskChar={null}
-            />
-            <InputLeftElement w='4.5rem' h='100%' className="InputLeft" pointerEvents="none">
-              <IoSpeedometerOutline color='white' size={24} />
-            </InputLeftElement>
 
-          </InputGroup>
+        >
+          <Text mt={16} fontSize='xl'>Please, insert the odometer reader:</Text>
+          <OdometerReader />
           <Button
             type={'submit'}
             w='100%'
