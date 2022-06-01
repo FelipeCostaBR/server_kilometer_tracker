@@ -10,14 +10,12 @@ sessionsRouter.get('/', async (_, response: Response) => {
 
 sessionsRouter.post('/', async (request, response) => {
   const { email, date_birth } = request.body;
-
   const authenticateUser = new CreateSessionService();
 
   const { user, token } = await authenticateUser.execute({
     email,
     date_birth,
   });
-
 
   return response.json({ user, token });
 });

@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import User from '../../database/entities/User';
 import AppError from '../../errors/AppError';
+
 interface IRequest {
   name: string;
   email: string;

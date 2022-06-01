@@ -15,9 +15,9 @@ vehiclesRouter.use(ensureAuthenticated);
 
 vehiclesRouter.get('/', async (_, response: Response) => {
   const vehiclesRepository = getRepository(Vehicle);
-  const vehicle = await vehiclesRepository.find();
+  const vehicles = await vehiclesRepository.find();
 
-  response.json(vehicle);
+  response.json(vehicles);
 });
 
 vehiclesRouter.get('/:id', async (request: Request, response: Response) => {
@@ -26,26 +26,34 @@ vehiclesRouter.get('/:id', async (request: Request, response: Response) => {
   const vehiclesRepository = getRepository(Vehicle);
   const vehicle = await vehiclesRepository.findOne(id);
 
-  response.json(vehicle);
+  response.json({ vehicle });
 });
 
-vehiclesRouter.post('/', isAdmin, async (request: Request, response: Response) => {
-  const vehicleData = request.body;
-  const createVehicle = new CreateVehicleService();
+vehiclesRouter.post(
+  '/',
+  isAdmin,
+  async (request: Request, response: Response) => {
+    const vehicleData = request.body;
+    const createVehicle = new CreateVehicleService();
 
-  const newVehicle = await createVehicle.execute(vehicleData)
+    const newVehicle = await createVehicle.execute(vehicleData);
 
-  return response.json(newVehicle);
-});
+    return response.json(newVehicle);
+  },
+);
 
-vehiclesRouter.delete('/:id', isAdmin, async (request: Request, response: Response) => {
-  const { id } = request.params;
-  const deleteVehicleService = new DeleteVehicleService();
+vehiclesRouter.delete(
+  '/:id',
+  isAdmin,
+  async (request: Request, response: Response) => {
+    const { id } = request.params;
+    const deleteVehicleService = new DeleteVehicleService();
 
-  const vehicle = await deleteVehicleService.execute(id)
+    const vehicle = await deleteVehicleService.execute(id);
 
-  return response.json(vehicle);
-});
+    return response.json(vehicle);
+  },
+);
 
 vehiclesRouter.put('/:id', async (request: Request, response: Response) => {
   const { id } = request.params;
@@ -54,7 +62,11 @@ vehiclesRouter.put('/:id', async (request: Request, response: Response) => {
 
   const updateVehicleService = new UpdateVehicleService();
 
-  const vehicle = await updateVehicleService.execute(id, user_id, vehicle_to_update)
+  const vehicle = await updateVehicleService.execute(
+    id,
+    user_id,
+    vehicle_to_update,
+  );
 
   return response.json(vehicle);
 });
