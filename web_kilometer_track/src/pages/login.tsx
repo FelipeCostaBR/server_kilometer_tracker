@@ -1,8 +1,30 @@
-import { Flex, Box, Stack, Input, Text, Button, Link } from '@chakra-ui/react';
+import { Flex, Box, Stack, Input, Text, Button, Link, FormLabel } from '@chakra-ui/react';
 import { Header } from '../components/Header';
-import { PasswordInput } from '../components/PasswordInput';
+import { useForm } from 'react-hook-form';
+
+import Router from 'next/router';
+import { useAuth } from '../hooks/auth';
+import { useCallback } from 'react';
+interface SignInFormData {
+  email: string;
+  date_birth: Date;
+}
 
 export default function Login() {
+  const { register, handleSubmit, formState } = useForm();
+  const { signIn } = useAuth();
+
+  const handleLoginIn = useCallback(
+    async (userInput: SignInFormData) => {
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      await signIn(userInput);
+
+      Router.push(`/dashboard`)
+    },
+    [signIn],
+  )
+
   return (
     <Flex
       w='100vw'
@@ -11,49 +33,72 @@ export default function Login() {
       flexDir={'column'}
     >
       <Header />
-      <Flex
-        as={'form'}
+      <Box
+        as='form'
         mt={16}
-        w='100vw'
-        align='center'
-        justify='center'
+        w='70%'
+        maxW='350px'
+        onSubmit={handleSubmit(handleLoginIn)}
       >
-        <Box w='70%'>
-          <Stack spacing={0}>
-            <Text>Email Address</Text>
-            <Input
-              type='email'
-              placeholder='e-mail'
-              size='lg'
-              bgColor='white'
-              color='blackAlpha.900'
-              isRequired={true}
-              focusBorderColor='green.light'
-            />
-          </Stack>
+        <Stack spacing={0}>
+          <FormLabel htmlFor='email' m='0'>
+            E-mail
+          </FormLabel>
+          <Input
+            name='email'
+            type='email'
+            placeholder='e-mail'
 
-          <Stack spacing={0} mt={5}>
-            <Text>Password</Text>
-            <PasswordInput />
-          </Stack>
-          <Box mt='32px'>
-            <Text textAlign='right'>Forgot Password?</Text>
-          </Box>
+            size='lg'
+            bgColor='white'
+            color='blackAlpha.900'
+            isRequired={true}
+            focusBorderColor='green.light'
+            {...register('email')}
+          />
+        </Stack>
 
-          <Link href='/dashboard'>
-            <Button
-              type={'submit'}
-              w='100%'
-              colorScheme="green"
-              size={'lg'}
-              mt='62px'
-            >
-              Login
-            </Button>
-          </Link>
+        <Stack spacing={0} mt={5}>
+          <FormLabel htmlFor='date_birth' m='0'>
+            Date of Birth
+          </FormLabel>
+          <Input
+            name='date_birth'
+            type="date"
+            placeholder={'date of birth'}
+            css={` ::-webkit-calendar-picker-indicator {
+                      background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) center/90% no-repeat;
+                                      }
+                     ::-webkit-datetime-edit { color: #718096 }
+                  `}
+
+            size='lg'
+            bgColor='white'
+            color='blackAlpha.900'
+            isRequired={true}
+            focusBorderColor='green.light'
+
+            {...register('date_birth')}
+          />
+        </Stack>
+        <Box mt='32px'>
+          <Text textAlign='right'>Forgot Password?</Text>
         </Box>
 
-      </Flex>
+        <Link href='/dashboard'>
+          <Button
+            isLoading={formState.isSubmitting}
+            type={'submit'}
+            w='100%'
+            colorScheme="green"
+            size={'lg'}
+            mt='62px'
+          >
+            Login
+          </Button>
+        </Link>
+      </Box>
     </Flex >
   )
 }
+

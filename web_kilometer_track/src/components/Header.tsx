@@ -6,7 +6,8 @@ export const Header = () => {
   return (
     <Box
       as='header'
-      w='80%'
+      w='350px'
+      maxW='70%'
       mt='42px'
       paddingRight={5}
     >
@@ -15,6 +16,7 @@ export const Header = () => {
           src={logo}
           alt="ETROS Logo"
           layout='responsive'
+
         />
       </Link>
     </Box >

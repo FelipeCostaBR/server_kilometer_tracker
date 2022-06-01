@@ -1,7 +1,6 @@
 import { getRepository } from 'typeorm';
 import Vehicle from '../../database/entities/Vehicle';
 import AppError from '../../errors/AppError';
-import { NumberSymbol } from '@angular/common';
 
 interface IRequest {
   user_id: string;
@@ -18,7 +17,7 @@ interface IRequest {
 class CreateVehicleService {
   public async execute(vehicleData: IRequest): Promise<Vehicle> {
     const vehiclesRepository = getRepository(Vehicle);
-    const { registration } = vehicleData
+    const { registration } = vehicleData;
 
     const checkVehicleExists = await vehiclesRepository.findOne({
       where: { registration },

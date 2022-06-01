@@ -1,8 +1,6 @@
 export default {
   jwt: {
     secret: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
-    expiresIn: '1y',
+    expiresIn: '120d',
   },
 };
-
-

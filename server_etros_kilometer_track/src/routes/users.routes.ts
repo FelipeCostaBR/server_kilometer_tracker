@@ -21,7 +21,7 @@ usersRouter.get(
       throw new AppError(error);
     });
 
-    response.json({ user });
+    response.json(user);
   },
 );
 
