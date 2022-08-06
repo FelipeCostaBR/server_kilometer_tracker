@@ -1,10 +1,21 @@
+import Router from 'next/router';
 import React, { createContext, useCallback, useState, useContext, PropsWithChildren } from 'react';
 import baseURL from '../services/api';
 
+interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  date_birth: Date;
+  phone: number;
+  created_at: Date;
+  updated_at: Date;
+}
 interface AuthState {
   token: string;
-  user: object;
-}
+  user: IUser;
+};
+
 
 interface SignInCredentials {
   email: string;
@@ -12,7 +23,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextState {
-  user: object;
+  user: IUser;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
@@ -35,22 +46,26 @@ const AuthProvider = ({ children }) => {
   });
 
   const signIn = useCallback(async (userInput: SignInCredentials) => {
+    console.log('TEst')
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userInput)
     };
 
-    const response = await fetch(`${baseURL}/sessions`, requestOptions);
+    // const response = await fetch(`${baseURL}/sessions`, requestOptions);
 
-    const { token, user } = await response.json();
+    // const { token, user }: AuthState = await response.json();
 
-    if (user.status) return;
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('@ETROS_KILOMETER:token', token);
-      localStorage.setItem('@ETROS_KILOMETER:user', JSON.stringify(user));
-    }
-    setData({ token, user });
+    // if (!user) return;
+
+    // if (typeof window !== 'undefined') {
+    //   localStorage.setItem('@ETROS_KILOMETER:token', token);
+    //   localStorage.setItem('@ETROS_KILOMETER:user', JSON.stringify(user));
+    // }
+    // setData({ token, user });
+
+    Router.push(`/dashboard`)
   }, []);
 
   const signOut = useCallback(() => {

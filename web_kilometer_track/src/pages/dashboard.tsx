@@ -3,22 +3,38 @@ import React from 'react';
 import { Card } from '../components/Card';
 import { Header } from '../components/Header';
 import { OdometerReader } from '../components/OdometerReader';
+import { useAuth } from '../hooks/auth';
+import baseURL from '../services/api';
 
-export default function Dashboard() {
-  const userData = {
-    Name: 'Felipe Costa',
-    email: 'felipe.costa@gmail.com',
-    date_birth: '15/07/1992'
-  }
+interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  date_birth: Date;
+  phone: number;
+  created_at: Date;
+  updated_at: Date;
+}
+interface IVehicle extends IUser {
 
-  const vehicleData = {
-    vehicle: 'Toyota',
-    model: 'Corolla',
-    year: '2013',
-    current_kilometers: '80.000',
-    next_km_to_service: '90.000',
-    next_service: '20/06/2023'
-  }
+  id: string;
+  user_id: string;
+  vehicle: string;
+  model: string;
+  year: string;
+  transmission: string;
+  registration: string;
+  current_kilometers: number;
+  next_km_to_service: number;
+  next_service: Date;
+  created_at: Date;
+  updated_at: Date
+}
+
+export default function Dashboard(vehicle: IVehicle, user: IUser) {
+  useAuth
+  console.log(vehicle)
+  console.log(user)
 
   return (
     <Flex
@@ -39,8 +55,8 @@ export default function Dashboard() {
         </Stack>
 
         <Stack spacing={6}>
-          <Card data={userData}>Your Details</Card>
-          <Card data={vehicleData}>Vehicle Details</Card>
+          {/* <Card data={user}>Your Details</Card> */}
+          {/* <Card data={vehicle}>Vehicle Details</Card> */}
 
         </Stack>
 
@@ -66,4 +82,13 @@ export default function Dashboard() {
       </Box>
     </Flex >
   )
+}
+
+export async function getServerSideProps(context) {
+  console.log('context', context)
+  const response = await fetch(`${baseURL}/vehicles/user/}`)
+  const vehicle = await response.json()
+
+  // Pass data to the page via props
+  return { props: { vehicle } }
 }

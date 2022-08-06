@@ -2,7 +2,7 @@ import { Faker } from '@faker-js/faker';
 import { define } from "typeorm-seeding";
 import User from "../../entities/User";
 
-import { validate_dt_birth } from '../../../helper/isOver18';
+import validate_dt_birth from '../../../helper/isOver18';
 
 
 define(User, (faker: Faker) => {

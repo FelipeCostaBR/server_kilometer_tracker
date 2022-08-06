@@ -19,7 +19,6 @@ export const OdometerReader = () => {
         border='InactiveBorder'
         isRequired={true}
         mask={"***.***"}
-        maskChar=""
         textAlign='left'
       />
       <InputLeftElement

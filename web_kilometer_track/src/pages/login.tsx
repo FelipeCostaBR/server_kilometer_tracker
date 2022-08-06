@@ -2,7 +2,6 @@ import { Flex, Box, Stack, Input, Text, Button, Link, FormLabel } from '@chakra-
 import { Header } from '../components/Header';
 import { useForm } from 'react-hook-form';
 
-import Router from 'next/router';
 import { useAuth } from '../hooks/auth';
 import { useCallback } from 'react';
 interface SignInFormData {
@@ -19,8 +18,6 @@ export default function Login() {
       await new Promise(resolve => setTimeout(resolve, 500));
 
       await signIn(userInput);
-
-      Router.push(`/dashboard`)
     },
     [signIn],
   )

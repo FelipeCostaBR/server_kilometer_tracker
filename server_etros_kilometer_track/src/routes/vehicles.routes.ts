@@ -29,6 +29,18 @@ vehiclesRouter.get('/:id', async (request: Request, response: Response) => {
   response.json({ vehicle });
 });
 
+vehiclesRouter.get('/user/:id', async (request: Request, response: Response) => {
+  const { id } = request.params;
+
+  const vehiclesRepository = getRepository(Vehicle);
+  const vehicle = await vehiclesRepository.findOne({
+    where: { user_id: id },
+  });
+
+  response.json({ vehicle });
+},
+);
+
 vehiclesRouter.post(
   '/',
   isAdmin,

@@ -1,5 +1,4 @@
 import {
-  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -11,7 +10,7 @@ import {
 import User from './User';
 
 @Entity('vehicles')
-class Vehicle extends BaseEntity {
+class Vehicle {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

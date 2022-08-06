@@ -1,5 +1,4 @@
 import { faker } from "@faker-js/faker";
-import { formatDate } from "./formatDate";
 
 function isOver18(dateOfBirth: Date) {
   const date18YrsAgo = new Date();

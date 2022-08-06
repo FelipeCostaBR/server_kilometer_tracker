@@ -8,12 +8,8 @@ interface IRequest {
   email: string;
   date_birth: string;
 }
-
 class UpdateUserService {
-  public async execute(
-    id: string,
-    userData: IRequest,
-  ): Promise<UpdateResult> {
+  public async execute(id: string, userData: IRequest): Promise<UpdateResult> {
     const usersRepository = getRepository(User);
 
     const user = await usersRepository.findOne({
@@ -21,13 +17,13 @@ class UpdateUserService {
     });
 
     if (!user) {
-      throw new AppError('user does not exist');
+      throw new AppError('user does not exist')
     }
 
-    const updateResult = usersRepository.update(id, userData);
+    const updateResult = usersRepository.update(id, userData)
 
-    return updateResult;
+    return updateResult
   }
 }
 
-export default UpdateUserService;
+export default UpdateUserService
