@@ -46,24 +46,6 @@ const AuthProvider = ({ children }) => {
   });
 
   const signIn = useCallback(async (userInput: SignInCredentials) => {
-    console.log('TEst')
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userInput)
-    };
-
-    // const response = await fetch(`${baseURL}/sessions`, requestOptions);
-
-    // const { token, user }: AuthState = await response.json();
-
-    // if (!user) return;
-
-    // if (typeof window !== 'undefined') {
-    //   localStorage.setItem('@ETROS_KILOMETER:token', token);
-    //   localStorage.setItem('@ETROS_KILOMETER:user', JSON.stringify(user));
-    // }
-    // setData({ token, user });
 
     Router.push(`/dashboard`)
   }, []);

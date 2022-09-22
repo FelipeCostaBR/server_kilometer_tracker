@@ -31,10 +31,50 @@ interface IVehicle extends IUser {
   updated_at: Date
 }
 
-export default function Dashboard(vehicle: IVehicle, user: IUser) {
+const users = [
+  {
+    id: 1,
+    name: "Felipe Costa",
+    email: "felipe@g.com",
+    dt_birth: "1992-07-15",
+  },
+  {
+    id: 2,
+    name: "Julian Costa",
+    email: "julian@g.com",
+    dt_birth: "2019-12-01",
+  }
+]
+const vehicles = [
+  {
+    id: 1,
+    user_id: null,
+    vehicle: "Volkswagen",
+    model: "Ranchero",
+    year: "2020",
+    transmission: "Automatic",
+    registration: "OV40TTH",
+    current_kilometers: 98857,
+    next_km_to_service: 108857,
+    next_service: null,
+
+  },
+  {
+    id: 2,
+    user_id: null,
+    vehicle: "Volvo",
+    model: "X10",
+    year: "2022",
+    transmission: "Automatic",
+    registration: "1PK020",
+    current_kilometers: 10000,
+    next_km_to_service: 20000,
+    next_service: "2022-10-20",
+  }
+]
+
+export default function Dashboard() {
   useAuth
-  console.log(vehicle)
-  console.log(user)
 
   return (
     <Flex
@@ -50,13 +90,13 @@ export default function Dashboard(vehicle: IVehicle, user: IUser) {
           mt='60px'
           textAlign={'center'}
         >
-          <Text fontSize='2xl'>Hi Felipe,</Text>
+          <Text fontSize='2xl'>Hi {users[0].name},</Text>
           <Text fontSize='2xl' >Thank you for choosing Etros!</Text>
         </Stack>
 
         <Stack spacing={6}>
-          {/* <Card data={user}>Your Details</Card> */}
-          {/* <Card data={vehicle}>Vehicle Details</Card> */}
+          <Card data={users[0]}>Your Details</Card>
+          <Card data={vehicles[0]}>Vehicle Details</Card>
 
         </Stack>
 
@@ -84,11 +124,9 @@ export default function Dashboard(vehicle: IVehicle, user: IUser) {
   )
 }
 
-export async function getServerSideProps(context) {
-  console.log('context', context)
-  const response = await fetch(`${baseURL}/vehicles/user/}`)
-  const vehicle = await response.json()
+// export async function getServerSideProps() {
+//   // imagine we have a fetch here ....
 
-  // Pass data to the page via props
-  return { props: { vehicle } }
-}
+//   // Pass data to the page via props
+//   return { props: { users } }
+// }
