@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js -d ./src/database/index.ts",
-    "db:seed": "ts-node-dev ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js -d ./src/database/data-source.config.ts",
+    "datasource": "ts-node ./node_modules/typeorm/cli.js -d ./src/database/data-source.config.ts",
     "dev:server": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "dependencies": {
@@ -20,7 +20,6 @@
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.6",
-    "typeorm-seeding": "^1.6.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -47,15 +47,22 @@ export default class CreateVehicles1635924390418 implements MigrationInterface {
           {
             name: 'current_kilometers',
             type: 'int',
+            isNullable: true,
           },
           {
             name: 'next_km_to_service',
             type: 'int',
+            isNullable: true,
           },
           {
             name: 'next_service',
             type: 'date',
             isNullable: true,
+          },
+          {
+            name: 'is_active',
+            type: 'boolean',
+            default: true,
           },
           {
             name: 'created_at',
@@ -66,6 +73,11 @@ export default class CreateVehicles1635924390418 implements MigrationInterface {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
           },
         ],
       }),

@@ -1,81 +1,29 @@
 import { Router, Request, Response } from 'express';
 
-import { getRepository } from 'typeorm';
-import AppError from '../errors/AppError';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
-import isAdmin from '../middlewares/isAdmin';
-
-import User from '../database/entities/User';
-import CreateUserService from '../services/UserServices/CreateUserService';
-import DeleteUserService from '../services/UserServices/DeleteUserService';
-import UpdateUserService from '../services/UserServices/UpdateUserService';
+// import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import { UserController } from '../controllers/UserController';
 
 const usersRouter = Router();
+const userController = new UserController();
 
-usersRouter.get(
-  '/',
-  [ensureAuthenticated, isAdmin],
-  async (request: Request, response: Response) => {
-    const usersRepository = getRepository(User);
-    const user = await usersRepository.find().catch(error => {
-      throw new AppError(error);
-    });
-
-    response.json(user);
-  },
-);
-
-usersRouter.get('/:id', async (request: Request, response: Response) => {
-  const { id } = request.params;
-
-  const usersRepository = getRepository(User);
-  const user = await usersRepository.findOne(id);
-
-  response.json(user);
+usersRouter.get('/', (request: Request, response: Response) => {
+  userController.index(request, response)
 });
 
-usersRouter.post('/', async (request: Request, response: Response) => {
-  const userData = request.body;
-
-  const createUser = new CreateUserService();
-
-  const user = await createUser.execute(userData).catch(error => {
-    throw new AppError(error);
-  });
-
-  return response.json(user);
+usersRouter.get('/:id', (request: Request, response: Response) => {
+  userController.show(request, response)
 });
 
-usersRouter.delete(
-  '/:id',
-  [ensureAuthenticated, isAdmin],
-  async (request: Request, response: Response) => {
-    const { id } = request.params;
+usersRouter.post('/', (request: Request, response: Response) => {
+  userController.create(request, response)
+});
 
-    const deleteUserService = new DeleteUserService();
+usersRouter.delete('/:id', (request: Request, response: Response) => {
+  userController.delete(request, response)
+});
 
-    const user = await deleteUserService.execute(id).catch(error => {
-      throw new AppError(error);
-    });
-    return response.json(user);
-  },
-);
-
-usersRouter.put(
-  '/:id',
-  [ensureAuthenticated, isAdmin],
-  async (request: Request, response: Response) => {
-    const { id } = request.params;
-    const userData = request.body;
-
-    const updateUserService = new UpdateUserService();
-
-    const user = await updateUserService.execute(id, userData).catch(error => {
-      throw new AppError(error);
-    });
-
-    return response.json(user);
-  },
-);
+usersRouter.put('/:id', (request: Request, response: Response) => {
+  userController.update(request, response)
+});
 
 export default usersRouter;

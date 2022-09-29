@@ -32,6 +32,11 @@ export default class CreateUsers1635923365802 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: 'is_active',
+            type: 'boolean',
+            default: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -40,6 +45,11 @@ export default class CreateUsers1635923365802 implements MigrationInterface {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
           },
         ],
       }),

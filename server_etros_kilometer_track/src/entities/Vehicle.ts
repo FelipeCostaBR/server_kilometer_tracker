@@ -6,8 +6,9 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  DeleteDateColumn
 } from 'typeorm';
-import User from './User';
+import { User } from './User';
 
 @Entity('vehicles')
 class Vehicle {
@@ -46,10 +47,13 @@ class Vehicle {
   user: User;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at: Date
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at: Date
+
+  @DeleteDateColumn()
+  deleted_at: Date
 }
 
 export default Vehicle;

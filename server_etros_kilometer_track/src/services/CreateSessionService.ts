@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 import AppError from '../errors/AppError';
-import User from '../database/entities/User';
+import User from '../entities/User';
 import { formatDate } from '../helper/formatDate';
 import authConfig from '../config/auth';
 

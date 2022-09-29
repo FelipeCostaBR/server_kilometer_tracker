@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { getRepository } from 'typeorm';
 
 import AppError from '../errors/AppError';
-import User from '../database/entities/User';
+import { UserRepository } from '../repositories/users/UserRepository';
 
 
 export default async function isAdmin(
@@ -10,9 +9,9 @@ export default async function isAdmin(
   _: Response,
   next: NextFunction
 ): Promise<void> {
-  const usersRepository = getRepository(User);
+  const usersRepository = new UserRepository();
 
-  const user = await usersRepository.findOne({ where: { id: request.user.user_id } })
+  const user = await usersRepository.find(request.user.user_id)
 
   if (user?.name !== process.env.ADMINNAME && user?.email !== process.env.ADMINEMAIL) {
     throw new AppError('Access denied', 403);

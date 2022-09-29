@@ -1,13 +1,14 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('users')
-class User {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,11 +24,16 @@ class User {
   @Column()
   phone: number;
 
+  @Column()
+  is_active: boolean
+
   @CreateDateColumn()
-  created_at: Date;
+  created_at: Date
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at: Date
+
+  @DeleteDateColumn()
+  deleted_at: Date
 }
 
-export default User;

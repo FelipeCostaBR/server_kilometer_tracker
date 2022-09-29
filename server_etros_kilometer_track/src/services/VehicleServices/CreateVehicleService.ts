@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm';
-import Vehicle from '../../database/entities/Vehicle';
+import Vehicle from '../../entities/Vehicle';
 import AppError from '../../errors/AppError';
 
 interface IRequest {

@@ -1,7 +1,7 @@
 import { EntityOptions, getRepository } from 'typeorm';
-import User from '../../database/entities/User';
+import User from '../../entities/User';
 
-import Vehicle from '../../database/entities/Vehicle';
+import Vehicle from '../../entities/Vehicle';
 import AppError from '../../errors/AppError';
 
 import isUserAdmin from '../../helper/isAdmin';

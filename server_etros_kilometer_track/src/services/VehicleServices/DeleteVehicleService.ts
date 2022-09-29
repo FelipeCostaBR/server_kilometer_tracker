@@ -1,5 +1,5 @@
 import { DeleteResult, getRepository, IsNull } from 'typeorm';
-import Vehicle from '../../database/entities/Vehicle';
+import Vehicle from '../../entities/Vehicle';
 import AppError from '../../errors/AppError';
 
 class DeleteVehicleService {
