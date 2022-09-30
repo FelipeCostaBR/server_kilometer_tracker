@@ -1,6 +1,6 @@
 import { User } from '../../entities/User'
 
-interface IUserDTO {
+export interface IUserDTO {
   name: string
   email: string
   date_birth: string

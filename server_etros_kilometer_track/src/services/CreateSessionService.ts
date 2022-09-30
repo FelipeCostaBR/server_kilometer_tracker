@@ -1,9 +1,9 @@
-import { getRepository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
-import AppError from '../errors/AppError';
-import User from '../entities/User';
+import { AppError } from '../errors/AppError';
+import { User } from '../entities/User';
 import { formatDate } from '../helper/formatDate';
 import authConfig from '../config/auth';
+import { UserRepository } from '../repositories/users/UserRepository';
 
 interface IRequest {
   email: string;
@@ -15,9 +15,9 @@ class CreateSessionService {
     email,
     date_birth,
   }: IRequest): Promise<{ user: User; token: string }> {
-    const usersRepository = getRepository(User);
+    const usersRepository = new UserRepository();
 
-    const user = await usersRepository.findOne({ where: { email } });
+    const user = await usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Email does not exist, please sign up', 401);

@@ -6,12 +6,12 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  DeleteDateColumn
+  DeleteDateColumn,
 } from 'typeorm';
 import { User } from './User';
 
 @Entity('vehicles')
-class Vehicle {
+export class Vehicle {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -56,4 +56,3 @@ class Vehicle {
   deleted_at: Date
 }
 
-export default Vehicle;

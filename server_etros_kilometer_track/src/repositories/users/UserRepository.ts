@@ -1,14 +1,7 @@
 import { Repository, UpdateResult } from 'typeorm'
 import { AppDataSource } from '../../database/data-source.config'
 import { User } from '../../entities/User';
-import { IUserRepository } from './IUserRepository'
-
-interface IUserDTO {
-  name: string
-  email: string
-  date_birth: string
-  phone: number
-}
+import { IUserRepository, IUserDTO } from './IUserRepository'
 
 class UserRepository implements IUserRepository {
 
@@ -25,14 +18,8 @@ class UserRepository implements IUserRepository {
   }
 
   async create(user: IUserDTO): Promise<User> {
-    const { name, email, date_birth, phone } = user;
 
-    const new_user = this.user_repository.create({
-      name,
-      email,
-      date_birth,
-      phone
-    })
+    const new_user = this.user_repository.create({ ...user })
 
     return await this.user_repository.save(new_user)
 
@@ -54,7 +41,7 @@ class UserRepository implements IUserRepository {
   }
 
   async findByEmail(email: string): Promise<User> {
-    const user = await this.user_repository.findOneBy({ email: email })
+    const user = await this.user_repository.findOneBy({ email })
 
     return user;
   }
