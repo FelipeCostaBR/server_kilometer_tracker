@@ -14,7 +14,8 @@ export interface IVehicleDTO {
 
 export interface IVehicleRepository {
   create(vehicle: IVehicleDTO): Promise<Vehicle>
-  update(vehicle: Vehicle, vehicleData: IVehicleDTO): Promise<Vehicle>
+  update(vehicleData: IVehicleDTO): Promise<Vehicle>
+  updateKilometer(vehicle: Vehicle, user_id: string, vehicleData: IVehicleDTO): Promise<Vehicle>
   delete(id: string): Promise<void>
   index(): Promise<Vehicle[]>
   find(id: string): Promise<Vehicle>

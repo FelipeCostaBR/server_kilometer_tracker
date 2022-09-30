@@ -28,8 +28,10 @@ class UserController {
   }
 
   async create(request: Request, response: Response): Promise<Response> {
-    const userData = request.body;
+    const { vehicle_id, ...userData } = request.body;
+
     try {
+
       const new_user = await userServices.create(userData)
       return response.status(201).send(new_user)
     } catch (error) {

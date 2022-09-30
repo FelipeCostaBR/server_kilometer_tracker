@@ -5,6 +5,7 @@ export interface IUserDTO {
   email: string
   date_birth: string
   phone: number
+  vehicle_id?: string
 }
 
 interface IUserRepository {

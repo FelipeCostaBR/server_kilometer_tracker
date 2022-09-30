@@ -31,14 +31,18 @@ export class VehicleService {
     return vehicle;
   }
 
-  async update(id: string, vehicleData: IVehicleDTO): Promise<Vehicle> {
+  async updateKilometer(id: string, user_id: string, vehicleData: IVehicleDTO): Promise<Vehicle> {
     const vehicle = await this.vehicleRepository.find(id)
 
     if (!vehicle) {
       throw new AppError('vehicle not found. not able to update');
     }
 
-    const vehicle_updated = await this.vehicleRepository.update(vehicle, vehicleData)
+    if (vehicleData.current_kilometers < vehicle.current_kilometers) {
+      throw new AppError("The kilometer can not be lower the previous one");
+    }
+
+    const vehicle_updated = await this.vehicleRepository.updateKilometer(vehicle, user_id, vehicleData)
     return vehicle_updated
   }
 

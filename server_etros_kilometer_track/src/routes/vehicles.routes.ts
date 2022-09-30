@@ -22,8 +22,8 @@ vehiclesRouter.delete('/:id', (request: Request, response: Response) => {
   vehicleController.delete(request, response)
 });
 
-vehiclesRouter.put('/:id', (request: Request, response: Response, next: NextFunction) => {
-  vehicleController.update(request, response)
+vehiclesRouter.put('/:user_id/:id', (request: Request, response: Response, next: NextFunction) => {
+  vehicleController.updateKilometer(request, response)
 });
 
 export default vehiclesRouter;

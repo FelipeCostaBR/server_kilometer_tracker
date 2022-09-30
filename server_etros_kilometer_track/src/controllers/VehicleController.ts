@@ -47,12 +47,12 @@ class VehicleController {
     }
   }
 
-  async update(request: Request, response: Response): Promise<Vehicle | Response> {
+  async updateKilometer(request: Request, response: Response): Promise<Vehicle | Response> {
+    const { user_id, id } = request.params;
     const vehicleData = request.body;
-    const { id } = request.params;
 
     try {
-      const vehicle = await vehicleServices.update(id, vehicleData)
+      const vehicle = await vehicleServices.updateKilometer(id, user_id, vehicleData)
       return response.status(200).send(vehicle)
     } catch (error) {
       return response.status(500).json(error.messages)

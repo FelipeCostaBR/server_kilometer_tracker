@@ -30,12 +30,17 @@ class VehicleRepository implements IVehicleRepository {
     return await this.vehicle_repository.save(new_vehicle)
   }
 
-  async update(vehicle: Vehicle, vehicleData: IVehicleDTO): Promise<Vehicle> {
+  async update(vehicleData: IVehicleDTO): Promise<Vehicle> {
+    const user_updated = await this.vehicle_repository.save(vehicleData)
+    return user_updated;
+  }
+
+  async updateKilometer(vehicle: Vehicle, user_id: string, vehicleData: IVehicleDTO): Promise<Vehicle> {
     // stablish real database connection using queryRunner
     const queryRunner = AppDataSource.createQueryRunner()
 
-    const new_user_vehicle_history = this.users_vehicles_repository.create({ user_id: vehicle.user_id, vehicle_id: vehicle.id, current_kilometers: vehicleData.current_kilometers })
-    const vehicleUpdated = this.vehicle_repository.create({ ...vehicle, ...vehicleData })
+    const new_user_vehicle_history = this.users_vehicles_repository.create({ user_id, vehicle_id: vehicle.id, current_kilometers: vehicleData.current_kilometers })
+    const vehicleUpdated = this.vehicle_repository.create({ user_id, ...vehicle, ...vehicleData })
 
     await queryRunner.startTransaction()
     try {

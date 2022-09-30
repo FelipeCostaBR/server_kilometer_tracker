@@ -1,6 +1,8 @@
 import { User } from '../../entities/User';
+import { Vehicle } from '../../entities/Vehicle';
 import { AppError } from '../../errors/AppError';
 import { IUserRepository } from '../../repositories/users/IUserRepository';
+import { VehicleRepository } from '../../repositories/vehicles/VehicleRepository';
 
 interface IRequest {
   name: string;
@@ -12,19 +14,14 @@ interface IRequest {
 export class UserService {
   constructor(private userRepository: IUserRepository) { }
 
-  async create({ name, email, date_birth, phone }: IRequest): Promise<User> {
-    const user = await this.userRepository.findByEmail(email);
+  async create(userData: IRequest): Promise<User> {
+    const user = await this.userRepository.findByEmail(userData.email);
 
     if (user) {
       throw new AppError('Email address already exist', 422);
     }
 
-    const new_user = await this.userRepository.create({
-      name,
-      email,
-      date_birth,
-      phone
-    });
+    const new_user = await this.userRepository.create({ ...userData });
 
     return new_user
   }
