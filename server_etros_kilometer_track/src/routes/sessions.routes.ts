@@ -1,23 +1,16 @@
 /* eslint-disable import/no-unresolved */
-import { Response, Router } from 'express';
-import CreateSessionService from '../services/CreateSessionService';
+import { Request, Response, Router } from 'express';
+import { CreateSessionController } from '../controllers/CreateSessionController';
 
 const sessionsRouter = Router();
+const createSessionController = new CreateSessionController();
 
-sessionsRouter.get('/', async (_, response: Response) => {
+sessionsRouter.get('/', (_, response: Response) => {
   response.json(true);
 });
 
-sessionsRouter.post('/', async (request, response) => {
-  const { email, date_birth } = request.body;
-  const authenticateUser = new CreateSessionService();
-
-  const { user, token } = await authenticateUser.execute({
-    email,
-    date_birth,
-  });
-
-  return response.json({ user, token });
+sessionsRouter.post('/', (request: Request, response: Response) => {
+  createSessionController.create(request, response)
 });
 
 export default sessionsRouter;

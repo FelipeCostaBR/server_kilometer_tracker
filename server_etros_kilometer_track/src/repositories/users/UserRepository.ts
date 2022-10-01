@@ -1,4 +1,4 @@
-import { Repository, UpdateResult } from 'typeorm'
+import { Repository } from 'typeorm'
 import { AppDataSource } from '../../database/data-source.config'
 import { User } from '../../entities/User';
 import { IUserRepository, IUserDTO } from './IUserRepository'

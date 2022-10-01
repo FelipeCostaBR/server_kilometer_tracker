@@ -5,25 +5,22 @@ import { formatDate } from '../helper/formatDate';
 import authConfig from '../config/auth';
 import { UserRepository } from '../repositories/users/UserRepository';
 
-interface IRequest {
-  email: string;
-  date_birth: string;
+interface UserAuthentication {
+  user: User
+  token: string
 }
 
 class CreateSessionService {
-  public async execute({
-    email,
-    date_birth,
-  }: IRequest): Promise<{ user: User; token: string }> {
-    const usersRepository = new UserRepository();
 
+  async create({ email, date_birth }): Promise<UserAuthentication> {
+    const usersRepository = new UserRepository()
     const user = await usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Email does not exist, please sign up', 401);
     }
 
-    if (user.email !== email || formatDate(user.date_birth) !== date_birth) {
+    if (user.email !== email || user.date_birth !== date_birth) {
       throw new AppError('Incorrect email/date_birth combination.', 401);
     }
 
