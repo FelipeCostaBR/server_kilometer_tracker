@@ -27,6 +27,17 @@ class VehicleController {
     }
   }
 
+  async showByUserId(request: Request, response: Response): Promise<Vehicle | Response> {
+    const { user_id } = request.params;
+
+    try {
+      const vehicles = await vehicleServices.findByUserId(user_id)
+      return response.status(200).send(vehicles);
+    } catch (error) {
+      return response.status(500).json(error.messages)
+    }
+  }
+
   async create(request: Request, response: Response): Promise<Response> {
     const vehicleData = request.body;
     try {

@@ -14,6 +14,10 @@ vehiclesRouter.get('/:id', (request: Request, response: Response) => {
   vehicleController.show(request, response)
 });
 
+vehiclesRouter.get('/user/:user_id', (request: Request, response: Response) => {
+  vehicleController.showByUserId(request, response)
+});
+
 vehiclesRouter.post('/', (request: Request, response: Response) => {
   vehicleController.create(request, response)
 });

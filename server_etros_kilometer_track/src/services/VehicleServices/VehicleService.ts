@@ -31,6 +31,15 @@ export class VehicleService {
     return vehicle;
   }
 
+  async findByUserId(user_id: string): Promise<Vehicle> {
+    const vehicle = await this.vehicleRepository.findByUserId(user_id)
+    if (!vehicle) {
+      throw new AppError('vehicle not found');
+    }
+
+    return vehicle;
+  }
+
   async updateKilometer(id: string, user_id: string, vehicleData: IVehicleDTO): Promise<Vehicle> {
     const vehicle = await this.vehicleRepository.find(id)
 

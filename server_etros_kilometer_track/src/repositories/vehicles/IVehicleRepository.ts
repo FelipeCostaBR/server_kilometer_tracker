@@ -20,5 +20,6 @@ export interface IVehicleRepository {
   index(): Promise<Vehicle[]>
   find(id: string): Promise<Vehicle>
   findByRegistration(registration: string): Promise<Vehicle>
+  findByUserId(user_id: string): Promise<Vehicle>
 }
 

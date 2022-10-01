@@ -75,6 +75,12 @@ class VehicleRepository implements IVehicleRepository {
 
     return vehicle;
   }
+
+  async findByUserId(user_id: string): Promise<Vehicle> {
+    const vehicle = await this.vehicle_repository.findOneBy({ user_id })
+
+    return vehicle;
+  }
 }
 
 export { VehicleRepository };
