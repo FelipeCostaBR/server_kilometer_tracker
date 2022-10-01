@@ -28,7 +28,7 @@ class UserController {
   }
 
   async create(request: Request, response: Response): Promise<Response> {
-    const { vehicle_id, ...userData } = request.body;
+    const userData = request.body;
 
     try {
 

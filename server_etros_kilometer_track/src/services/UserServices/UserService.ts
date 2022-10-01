@@ -1,9 +1,6 @@
 import { User } from '../../entities/User';
-import { Vehicle } from '../../entities/Vehicle';
 import { AppError } from '../../errors/AppError';
 import { IUserRepository } from '../../repositories/users/IUserRepository';
-import { VehicleRepository } from '../../repositories/vehicles/VehicleRepository';
-
 interface IRequest {
   name: string;
   email: string;
