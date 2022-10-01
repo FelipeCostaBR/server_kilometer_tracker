@@ -1,10 +1,9 @@
 import { sign } from 'jsonwebtoken';
 import { AppError } from '../errors/AppError';
 import { User } from '../entities/User';
-import { formatDate } from '../helper/formatDate';
 import authConfig from '../config/auth';
 import { UserRepository } from '../repositories/users/UserRepository';
-
+import { formatDate } from '../helper/formatDate'
 interface UserAuthentication {
   user: User
   token: string
@@ -17,10 +16,14 @@ class CreateSessionService {
     const user = await usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError('Email does not exist, please sign up', 401);
+      throw new AppError('Email does not exist, please sign up.', 401);
     }
 
-    if (user.email !== email || user.date_birth !== date_birth) {
+    if (!user.is_active) {
+      throw new AppError('This account is not active., ', 401);
+    }
+
+    if (user.email !== email || user.date_birth !== formatDate(date_birth)) {
       throw new AppError('Incorrect email/date_birth combination.', 401);
     }
 

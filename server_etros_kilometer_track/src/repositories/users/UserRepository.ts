@@ -12,7 +12,9 @@ class UserRepository implements IUserRepository {
   }
 
   async index(): Promise<User[]> {
-    const users = await this.user_repository.find()
+    const users = await this.user_repository.find({
+      where: { is_active: true }
+    })
 
     return users;
   }
@@ -35,7 +37,12 @@ class UserRepository implements IUserRepository {
   }
 
   async find(id: string): Promise<User> {
-    const user = await this.user_repository.findOneBy({ id: id })
+    const user = await this.user_repository.findOne({
+      where: {
+        is_active: true,
+        id
+      }
+    })
 
     return user;
   }
