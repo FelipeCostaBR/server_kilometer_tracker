@@ -44,9 +44,11 @@ export default function Dashboard() {
   const { register, handleSubmit, formState } = useForm();
 
 
-  const handleOdometerUpdate = async (userInput: IVehicle) => (
-    await api.put(`/vehicles/user/${user_id}`, userInput)
-  )
+  const handleOdometerUpdate = async (userInput: IVehicle) => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await api.put(`/vehicles/user/${user_id}`, userInput
+    )
+  }
 
   useEffect(() => {
     const storage_user = localStorage.getItem('@ETROS_KILOMETER:user');
@@ -78,8 +80,8 @@ export default function Dashboard() {
         </Stack>
 
         <Stack spacing={6}>
-          <Card data={user}>Your Details</Card>
-          <Card data={vehicle}>Vehicle Details</Card>
+          <Card user={user}>Your Details</Card>
+          <Card vehicle={vehicle}>Vehicle Details</Card>
 
         </Stack>
 

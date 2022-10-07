@@ -2,16 +2,41 @@ import { Box, Text, Flex, Collapse, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IoIosArrowBack, IoIosArrowDown } from 'react-icons/io';
 
+interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  date_birth: Date;
+  phone: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface IVehicle {
+  id: string;
+  user_id: string;
+  vehicle: string;
+  model: string;
+  year: string;
+  transmission: string;
+  registration: string;
+  current_kilometers: number;
+  next_km_to_service: number;
+  next_service: Date;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date;
+}
 
 interface DataInfos {
   children: string;
-  data: object;
+  user?: IUser;
+  vehicle?: IVehicle;
 }
 
-export const Card = ({ children, data }: DataInfos) => {
+export const Card = ({ children, user, vehicle }: DataInfos) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleTransition = () => setIsOpen(!isOpen)
-  const data_array = Object.entries(data)
 
   return (
     <Box
@@ -50,19 +75,77 @@ export const Card = ({ children, data }: DataInfos) => {
             mb={5}
             w='100%'
           >
-            {data_array.map((value, index) => (
-              <Text
+            {user ?
+              <>
+                <Text
+                  bg='white'
+                  color='blackAlpha.900'
+                  paddingX={3}
+                  paddingY={1.5}
+                  borderRadius='4px'
+                >
+                  <strong>{'Name'}:</strong> {user.name}
+                </Text>
+                <Text
+                  bg='white'
+                  color='blackAlpha.900'
+                  paddingX={3}
+                  paddingY={1.5}
+                  borderRadius='4px'
+                >
+                  <strong>{'Email'}:</strong> {user.email}
+                </Text>
+                <Text
+                  bg='white'
+                  color='blackAlpha.900'
+                  paddingX={3}
+                  paddingY={1.5}
+                  borderRadius='4px'
+                >
+                  <strong>{'Phone'}:</strong> {user.phone}
+                </Text>
+              </>
 
-                key={index}
-                bg='white'
-                color='blackAlpha.900'
-                paddingX={3}
-                paddingY={1.5}
-                borderRadius='4px'
-              >
-                <strong>{value.shift()}:</strong> {value.pop()}
-              </Text>
-            ))}
+              :
+              <>
+                <Text
+                  bg='white'
+                  color='blackAlpha.900'
+                  paddingX={3}
+                  paddingY={1.5}
+                  borderRadius='4px'
+                >
+                  <strong>{'Vehicle'}:</strong> {vehicle.vehicle}
+                </Text>
+                <Text
+                  bg='white'
+                  color='blackAlpha.900'
+                  paddingX={3}
+                  paddingY={1.5}
+                  borderRadius='4px'
+                >
+                  <strong>{'Model'}:</strong> {vehicle.model}
+                </Text>
+                <Text
+                  bg='white'
+                  color='blackAlpha.900'
+                  paddingX={3}
+                  paddingY={1.5}
+                  borderRadius='4px'
+                >
+                  <strong>{'Year'}:</strong> {vehicle.year}
+                </Text>
+                <Text
+                  bg='white'
+                  color='blackAlpha.900'
+                  paddingX={3}
+                  paddingY={1.5}
+                  borderRadius='4px'
+                >
+                  <strong>{'Registration'}:</strong> {vehicle.registration}
+                </Text>
+              </>
+            }
           </Stack>
         </Flex>
 
