@@ -1,9 +1,10 @@
-import { Flex, Box, Stack, Input, Text, Button, Link, FormLabel } from '@chakra-ui/react';
-import { Header } from '../components/Header';
-import { useForm } from 'react-hook-form';
-
-import { useAuth } from '../hooks/auth';
 import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+import Router from 'next/router';
+import { Flex, Box, Stack, Input, Text, Button, Link, FormLabel } from '@chakra-ui/react';
+
+import { Header } from '../components/Header';
+import { useAuth } from '../hooks/auth';
 interface SignInFormData {
   email: string;
   date_birth: Date;
@@ -16,8 +17,8 @@ export default function Login() {
   const handleLoginIn = useCallback(
     async (userInput: SignInFormData) => {
       await new Promise(resolve => setTimeout(resolve, 500));
-
-      await signIn(userInput);
+      const user_id = await signIn({ email: userInput.email, date_birth: userInput.date_birth });
+      Router.push(`/dashboard/${user_id}`)
     },
     [signIn],
   )

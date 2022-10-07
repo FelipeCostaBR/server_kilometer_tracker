@@ -1,5 +1,5 @@
 import { User } from '../../entities/User';
-import { AppError } from '../../errors/AppError';
+import AppError from '../../errors/AppError';
 import { IUserRepository } from '../../repositories/users/IUserRepository';
 interface IRequest {
   name: string;

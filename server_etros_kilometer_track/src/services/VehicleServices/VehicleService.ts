@@ -1,5 +1,6 @@
+import { throws } from 'assert';
 import { Vehicle } from '../../entities/Vehicle';
-import { AppError } from '../../errors/AppError';
+import AppError from '../../errors/AppError';
 import { IVehicleRepository, IVehicleDTO } from '../../repositories/vehicles/IVehicleRepository';
 
 export class VehicleService {
@@ -40,18 +41,31 @@ export class VehicleService {
     return vehicle;
   }
 
-  async updateKilometer(id: string, user_id: string, vehicleData: IVehicleDTO): Promise<Vehicle> {
+  async update(id: string, vehicleData: IVehicleDTO): Promise<Vehicle> {
     const vehicle = await this.vehicleRepository.find(id)
 
     if (!vehicle) {
       throw new AppError('vehicle not found. not able to update');
     }
 
-    if (vehicleData.current_kilometers < vehicle.current_kilometers) {
-      throw new AppError("The kilometer can not be lower the previous one");
+    const vehicle_updated = await this.vehicleRepository.update({ ...vehicle, ...vehicleData })
+    return vehicle_updated
+  }
+
+  async updateKilometer(user_id: string, current_kilometers: number): Promise<Vehicle | AppError> {
+    const vehicle = await this.vehicleRepository.findByUserId(user_id)
+
+    if (!vehicle) {
+      throw new Error("Message error");
+
     }
 
-    const vehicle_updated = await this.vehicleRepository.updateKilometer(vehicle, user_id, vehicleData)
+    if (current_kilometers <= vehicle.current_kilometers) {
+      throw new AppError("The kilometer can not be lower the previous one")
+
+    }
+
+    const vehicle_updated = await this.vehicleRepository.updateKilometer(vehicle, user_id, current_kilometers)
     return vehicle_updated
   }
 

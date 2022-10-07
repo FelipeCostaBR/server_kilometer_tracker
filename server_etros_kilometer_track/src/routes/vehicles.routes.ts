@@ -3,9 +3,11 @@ import { Router, Request, Response, NextFunction } from 'express';
 // import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import { VehicleController } from '../controllers/VehicleController';
 
+
 const vehiclesRouter = Router();
 const vehicleController = new VehicleController();
 
+// vehiclesRouter.use(ensureAuthenticated)
 vehiclesRouter.get('/', (request: Request, response: Response) => {
   vehicleController.index(request, response)
 });
@@ -26,8 +28,12 @@ vehiclesRouter.delete('/:id', (request: Request, response: Response) => {
   vehicleController.delete(request, response)
 });
 
-vehiclesRouter.put('/:user_id/:id', (request: Request, response: Response, next: NextFunction) => {
-  vehicleController.updateKilometer(request, response)
+vehiclesRouter.put('/:id', (request: Request, response: Response, next: NextFunction) => {
+  vehicleController.update(request, response)
+});
+
+vehiclesRouter.put('/user/:user_id', async (request: Request, response: Response, next: NextFunction) => {
+  await vehicleController.updateKilometer(request, response)
 });
 
 export default vehiclesRouter;

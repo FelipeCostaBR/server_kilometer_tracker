@@ -1,14 +1,15 @@
 import { InputGroup, Input, InputLeftElement } from '@chakra-ui/react';
+import { FieldValue, UseFormRegister } from 'react-hook-form';
 import { IoSpeedometerOutline } from 'react-icons/io5';
 
 import InputMask from "react-input-mask";
 
-export const OdometerReader = () => {
+export const OdometerReader = ({ register }) => {
 
   return (
     <InputGroup>
       <Input
-        as={InputMask}
+        type={'number'}
         placeholder='Type here'
         _placeholder={{ opacity: 0.5, color: 'inherit' }}
         paddingLeft={14}
@@ -18,9 +19,11 @@ export const OdometerReader = () => {
         color='white'
         border='InactiveBorder'
         isRequired={true}
-        mask={"***.***"}
         textAlign='left'
+        name='current_kilometers'
+        {...register('current_kilometers')}
       />
+
       <InputLeftElement
         w='4.5rem'
         h='100%'

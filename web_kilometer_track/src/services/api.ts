@@ -1,3 +1,7 @@
-const baseURL = 'http://localhost:3333' || 'http://localhost:3000'
+import axios from 'axios';
 
-export default baseURL;
+const api = axios.create({
+  baseURL: 'http://localhost:3333/' || 'http://localhost:3000/',
+});
+
+export default api;

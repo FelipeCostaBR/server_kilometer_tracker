@@ -2,7 +2,7 @@ import { Repository, QueryRunner, Entity, EntityManager } from 'typeorm'
 import { AppDataSource } from '../../database/data-source.config'
 import { UsersVehicles } from '../../entities/UsersVehicles';
 import { Vehicle } from '../../entities/Vehicle';
-import { AppError } from '../../errors/AppError';
+import AppError from '../../errors/AppError';
 import vehiclesRouter from '../../routes/vehicles.routes';
 import { IVehicleDTO, IVehicleRepository } from './IVehicleRepository'
 
@@ -35,12 +35,12 @@ class VehicleRepository implements IVehicleRepository {
     return user_updated;
   }
 
-  async updateKilometer(vehicle: Vehicle, user_id: string, vehicleData: IVehicleDTO): Promise<Vehicle> {
+  async updateKilometer(vehicle: Vehicle, user_id: string, current_kilometers: number): Promise<Vehicle> {
     // stablish real database connection using queryRunner
     const queryRunner = AppDataSource.createQueryRunner()
 
-    const new_user_vehicle_history = this.users_vehicles_repository.create({ user_id, vehicle_id: vehicle.id, current_kilometers: vehicleData.current_kilometers })
-    const vehicleUpdated = this.vehicle_repository.create({ user_id, ...vehicle, ...vehicleData })
+    const new_user_vehicle_history = this.users_vehicles_repository.create({ user_id, vehicle_id: vehicle.id, current_kilometers })
+    const vehicleUpdated = this.vehicle_repository.create({ ...vehicle, user_id, current_kilometers })
 
     await queryRunner.startTransaction()
     try {

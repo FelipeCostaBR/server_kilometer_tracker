@@ -1,7 +1,5 @@
-import Router from 'next/router';
-import React, { createContext, useCallback, useState, useContext, PropsWithChildren } from 'react';
-import baseURL from '../services/api';
-
+import React, { createContext, useCallback, useState, useContext } from 'react';
+import api from '../services/api';
 interface IUser {
   id: string;
   name: string;
@@ -10,6 +8,7 @@ interface IUser {
   phone: number;
   created_at: Date;
   updated_at: Date;
+  deleted_at: Date;
 }
 interface AuthState {
   token: string;
@@ -45,9 +44,19 @@ const AuthProvider = ({ children }) => {
     return {} as AuthState;
   });
 
-  const signIn = useCallback(async (userInput: SignInCredentials) => {
+  const signIn = useCallback(async ({ email, date_birth }: SignInCredentials) => {
+    const response = await api.post('sessions', {
+      email,
+      date_birth,
+    });
 
-    Router.push(`/dashboard`)
+    const { token, user } = response.data;
+
+    localStorage.setItem('@ETROS_KILOMETER:token', token);
+    localStorage.setItem('@ETROS_KILOMETER:user', JSON.stringify(user));
+
+    setData({ token, user });
+    return user.id
   }, []);
 
   const signOut = useCallback(() => {

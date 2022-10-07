@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken';
-import { AppError } from '../errors/AppError';
+import AppError from '../errors/AppError';
 import { User } from '../entities/User';
 import authConfig from '../config/auth';
 import { UserRepository } from '../repositories/users/UserRepository';

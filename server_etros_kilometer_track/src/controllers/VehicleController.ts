@@ -23,7 +23,7 @@ class VehicleController {
       const vehicles = await vehicleServices.show(id)
       return response.status(200).send(vehicles);
     } catch (error) {
-      return response.status(500).json(error.messages)
+      return response.status(500).send(error.messages)
     }
   }
 
@@ -34,7 +34,7 @@ class VehicleController {
       const vehicles = await vehicleServices.findByUserId(user_id)
       return response.status(200).send(vehicles);
     } catch (error) {
-      return response.status(500).json(error.messages)
+      return response.status(500).send(error.messages)
     }
   }
 
@@ -44,7 +44,7 @@ class VehicleController {
       const new_vehicle = await vehicleServices.create(vehicleData)
       return response.status(201).send(new_vehicle)
     } catch (error) {
-      return response.status(500).json(error.messages)
+      return response.status(500).send(error.messages)
     }
   }
 
@@ -54,19 +54,31 @@ class VehicleController {
       await vehicleServices.delete(id)
       return response.status(202).send()
     } catch (error) {
-      return response.status(500).json(error.messages)
+      return response.status(500).send(error.messages)
+    }
+  }
+
+  async update(request: Request, response: Response): Promise<Vehicle | Response> {
+    const { id } = request.params;
+    const vehicleData = request.body;
+
+    try {
+      const vehicle = await vehicleServices.update(id, vehicleData)
+      return response.status(200).send(vehicle)
+    } catch (error) {
+      return response.status(500).send(error.messages)
     }
   }
 
   async updateKilometer(request: Request, response: Response): Promise<Vehicle | Response> {
-    const { user_id, id } = request.params;
-    const vehicleData = request.body;
+    const { user_id } = request.params;
+    const { current_kilometers } = request.body;
 
     try {
-      const vehicle = await vehicleServices.updateKilometer(id, user_id, vehicleData)
+      const vehicle = await vehicleServices.updateKilometer(user_id, current_kilometers)
       return response.status(200).send(vehicle)
     } catch (error) {
-      return response.status(500).json(error.messages)
+      return response.status(500).send(error.messages)
     }
   }
 }
