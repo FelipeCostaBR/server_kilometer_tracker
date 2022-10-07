@@ -10,7 +10,7 @@ import { Vehicle } from "../entities/Vehicle";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
+  host: "database_kilometer_tracker",
   port: 5432,
   username: "postgres",
   password: "docker",
@@ -19,6 +19,13 @@ export const AppDataSource = new DataSource({
   migrations: ["./src/database/migrations/*.ts"],
 })
 
+const runMigration = async () => {
+  await AppDataSource.runMigrations()
+  console.log("TypeORM run migrations complete.")
+}
+
 AppDataSource.initialize().then(async () => {
   console.log("Initializing the database...")
+  await runMigration()
 }).catch((err) => console.log(err))
+
